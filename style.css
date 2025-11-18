@@ -1,0 +1,10 @@
+.book{
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  /* justify-content: center; */
+}
