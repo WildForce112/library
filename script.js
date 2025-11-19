@@ -35,6 +35,24 @@ function addBookToLibrary(book){
   library.push(book);
 }
 
+function addBookToShelf(book, shelf){
+  const bookDisplay = document.createElement('div');
+  bookDisplay.className = 'book';
+  const bookName = document.createElement('div');
+  bookName.textContent = book.name;
+  const bookAuthor = document.createElement('div');
+  bookAuthor.textContent = book.author;
+  // bookAuthor.style.width = '30%';
+  bookDisplay.style.backgroundColor = generateRandomHexColor();
+  bookDisplay.style.color = generateRandomHexColor();
+  bookDisplay.style.height = `${getRandomNumber(70, 90)}%`;
+  bookDisplay.style.width = `${book.pages}px`;
+  bookDisplay.style.border = `2px solid ${generateRandomHexColor()}`
+  bookDisplay.appendChild(bookName);
+  bookDisplay.appendChild(bookAuthor);
+  shelf.appendChild(bookDisplay);
+}
+
 const book1 = new Book("12", "23", 53, false);
 const book2 = new Book("23", "56", 99, true);
 addBookToLibrary(book1);
@@ -49,32 +67,24 @@ addBookToLibrary(book1);
 addBookToLibrary(book2);
 
 const shelves = document.createElement('div');
-
-const libraryContainer = document.createElement('div');
-libraryContainer.style.textWrap = 'wrap';
-libraryContainer.style.display = 'flex';
-libraryContainer.style.alignItems = 'flex-end';
-
-libraryContainer.style.height = '16vh';
-libraryContainer.style.border = '1px solid brown';
+const newBookBtn = document.createElement('button');
+newBookBtn.textContent = 'Add a Book';
+newBookBtn.className = 'addBookBtn';
+newBookBtn.style.justifySelf = 'center';
+document.body.appendChild(newBookBtn);
+const shelf1 = document.createElement('div');
+shelf1.style.textWrap = 'wrap';
+shelf1.style.display = 'flex';
+shelf1.style.alignItems = 'flex-end';
+shelf1.style.height = '16vh';
+shelf1.style.width = '98vw';
+shelf1.style.border = '1px solid brown';
 for(book of library){
-  const bookDisplay = document.createElement('div');
-  bookDisplay.className = 'book';
-  const bookName = document.createElement('div');
-  bookName.textContent = book.name;
-  const bookAuthor = document.createElement('div');
-  bookAuthor.textContent = book.author;
-  bookDisplay.style.backgroundColor = generateRandomHexColor();
-  bookDisplay.style.color = generateRandomHexColor();
-  bookDisplay.style.height = `${getRandomNumber(70, 90)}%`;
-  bookDisplay.style.width = `${book.pages}px`;
-  bookDisplay.appendChild(bookName);
-  bookDisplay.appendChild(bookAuthor);
-
-  // bookDisplay.textContent = `${book.name}\n${book.author}`;
-  
-  libraryContainer.appendChild(bookDisplay);
+  addBookToShelf(book, shelf1);
 }
-document.body.appendChild(libraryContainer);
+// library.shift();
+// console.log(library);
+
+document.body.appendChild(shelf1);
 for(book of library) console.log(book);
 // console.log(library[0]);
