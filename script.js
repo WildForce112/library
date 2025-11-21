@@ -56,6 +56,12 @@ function addBookToShelf(book, shelf) {
 
   bookDisplay.appendChild(bookName);
   bookDisplay.appendChild(bookAuthor);
+
+  const removeBtn = document.createElement('button');
+  removeBtn.className = 'removeBook';
+  removeBtn.textContent = 'X';
+  bookDisplay.appendChild(removeBtn);
+
   shelf.appendChild(bookDisplay);
 }
 
