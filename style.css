@@ -15,7 +15,7 @@ body{
   font-weight: bold;
   margin: 1vh;
   /* width: ; */
-  
+
   padding: 3vh 0;
 }
 
@@ -27,4 +27,35 @@ body{
   align-items: center;
   justify-content: center;
   width: 100px;
+}
+
+dialog {
+  border-radius: calc(15px + 1vh + 0.05vw);
+  background-color: beige;
+  border-color: brown;
+}
+
+dialog div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3vh;
+}
+
+dialog label {
+  font-size: 1rem;
+}
+
+dialog input {
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  border-color: inherit;
+}
+
+dialog button {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  background-color: bisque;
 }
