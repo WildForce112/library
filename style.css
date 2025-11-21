@@ -73,4 +73,5 @@ dialog button {
   position: absolute;
   top: -50px;
   background-color: transparent;
+  transform: rotate(270deg);
 }

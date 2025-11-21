@@ -40,6 +40,7 @@ function addBookToLibrary(book) {
 
 function addBookToShelf(book, shelf) {
   const bookDisplay = document.createElement('div');
+  bookDisplay.dataset.id = book.id;
   bookDisplay.className = 'book';
   bookDisplay.style.backgroundColor = book.background;
   bookDisplay.style.color = book.color;
@@ -60,6 +61,7 @@ function addBookToShelf(book, shelf) {
   const removeBtn = document.createElement('button');
   removeBtn.className = 'removeBook';
   removeBtn.textContent = 'X';
+  removeBtn.dataset.id = book.id;
   bookDisplay.appendChild(removeBtn);
 
   shelf.appendChild(bookDisplay);
@@ -139,3 +141,14 @@ document.body.appendChild(shelf1); // Append the shelf to the body
 // Example: Log Library and First Book
 console.log(library); // Logs the library with books
 console.log(library[0]); // Logs the first book in the library
+
+document.addEventListener('click', (e) => {
+  if(e.target.textContent == "X") 
+    {
+      const id = e.target.dataset.id;
+      const display = document.querySelector(`[data-id="${id}"]`);
+
+      display.remove();
+    }
+  // console.log(e.target.textContent);
+})
