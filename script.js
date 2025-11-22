@@ -31,6 +31,10 @@ function Book(name, author, pages, read) {
   this.border = `2px solid ${generateRandomHexColor()}`;
 }
 
+Book.prototype.toggleReadStatus = function() {
+  this.read = !this.read;  
+}
+
 // Library Management Functions
 const library = [];
 
@@ -38,25 +42,52 @@ function addBookToLibrary(book) {
   library.push(book);
 }
 
+// Function to get a book by id
+function getBookById(id) {
+  return library.find(book => book.id === id);
+}
+
+function updateReadStatus(book, bookDisplay) {
+  const readStatus = document.createElement('button');
+  readStatus.className = 'read-status';
+  readStatus.dataset.id = book.id;
+  if(book.read == true) {
+    readStatus.textContent = 'Read';
+    readStatus.style.color = "green";
+    readStatus.style.border = "0.2rem solid green";
+  }
+  else {
+    readStatus.textContent = `Not Read`;
+    readStatus.style.color = "red";
+    readStatus.style.border = "0.2rem solid red";
+
+  }
+  bookDisplay.appendChild(readStatus);
+}
+
 function addBookToShelf(book, shelf) {
   const bookDisplay = document.createElement('div');
   bookDisplay.dataset.id = book.id;
   bookDisplay.className = 'book';
+  // bookDisplay.style.display = 'flex';
   bookDisplay.style.backgroundColor = book.background;
   bookDisplay.style.color = book.color;
   bookDisplay.style.height = book.height;
   bookDisplay.style.width = book.width;
   bookDisplay.style.border = book.border;
-  bookDisplay.style.fontSize = '1rem';
 
   const bookName = document.createElement('div');
+  bookName.className = 'book-name';
   bookName.textContent = book.name;
 
   const bookAuthor = document.createElement('div');
+  bookAuthor.className = 'book-author';
   bookAuthor.textContent = book.author;
 
   bookDisplay.appendChild(bookName);
   bookDisplay.appendChild(bookAuthor);
+  
+  updateReadStatus(book, bookDisplay);
 
   const removeBtn = document.createElement('button');
   removeBtn.className = 'removeBook';
@@ -143,12 +174,16 @@ console.log(library); // Logs the library with books
 console.log(library[0]); // Logs the first book in the library
 
 document.addEventListener('click', (e) => {
-  if(e.target.textContent == "X") 
-    {
-      const id = e.target.dataset.id;
-      const display = document.querySelector(`[data-id="${id}"]`);
+  const id = e.target.dataset.id;
+  const display = document.querySelector(`[data-id="${id}"]`);
 
-      display.remove();
-    }
-  // console.log(e.target.textContent);
+  if(e.target.textContent == "X") {
+    display.remove();
+  }
+  if(e.target.textContent == 'Read' || e.target.textContent == 'Not Read') {
+    e.target.remove();
+    const book = getBookById(id);
+    book.toggleReadStatus();
+    updateReadStatus(book, display);
+  }
 })
