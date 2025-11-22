@@ -30,7 +30,7 @@ body{
   font-size: 1rem;
 }
 
-.book-name {
+.book-name, .book-author {
   height: 90%;
   display: flex;
   justify-content: center;
